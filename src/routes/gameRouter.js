@@ -3,9 +3,9 @@ import * as gameService from "../services/gameService"
 
 const router = express.Router()
 
-// Ecoute la requête POST /games.
+// Listen to POST / ames
 router.post("/", function (req, res) {
-  if(!req.body.name) {
+  if (!req.body.name) {
     return res.status(400).send("Missing name parameter")
   }
   const newGame = gameService.createGame(req.body.name)
