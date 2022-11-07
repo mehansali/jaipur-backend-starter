@@ -36,6 +36,7 @@ export function putCamelsFromHandToHerd(game) {
 }
 
 // Create a game object
+
 export function createGame(name) {
   const deck = initDeck()
   const market = ["camel", "camel", "camel", ...drawCards(deck, 2)]
@@ -67,4 +68,11 @@ export function createGame(name) {
   putCamelsFromHandToHerd(game)
   db.saveGame(game)
   return game
+}
+
+export function getGames() {
+
+  const games = db.getGames(); 
+  return games.map((game) => ({ id: game.id, name: game.name}))
+
 }

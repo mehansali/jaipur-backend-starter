@@ -37,6 +37,16 @@ export function saveGame(game) {
 }
 
 // Delete all games
+
 export function clear() {
-  fs.rmSync(DATABASE_FILE)
+
+  try {
+    fs.unlinkSync(DATABASE_FILE)
+  }
+  
+  catch(e) {
+
+  }
+
+
 }
