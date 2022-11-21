@@ -31,4 +31,10 @@ describe("Game service", () => {
     expect(game._players[1].hand).toStrictEqual(["gold", "gold"])
     expect(game._players[1].camelsCount).toBe(0)
   })
+
+
+  test("should get games from db", () => {
+   db.saveGame
+  })
+
 })
