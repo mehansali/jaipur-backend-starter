@@ -81,6 +81,6 @@ export function getGamesById(id) {
   // filter pour trouver le bon id
   console.log(gameId)
   const game = games.find((game) => game.id === gameId)
-  
+
   return game
 }
