@@ -8,7 +8,28 @@ router.post("/", function (req, res) {
     return res.status(400).send("Missing name parameter")
   }
   const newGame = gameService.createGame(req.body.name)
-  res.status(201).json({ id: newGame.id, name: newGame.name })
+  res.status(200).json({ id: newGame.id, name: newGame.name })
+})
+
+// Listen to get /games
+router.get("/", function (req, res) {
+  const games = gameService.getGames()
+  res.status(200).json(games)
+})
+
+router.post("/:gameId/players/:playerId", function (req, res) {
+  if (!req.body.name) {
+    return res.status(400).send("Missing name parameter")
+  }
+  const id = req.params.gameId
+  const idPlayer = req.params.playerId
+
+  if (!id || !idPlayer) {
+    return res.status(400).send("GameId or player not found")
+  }
+  const game = gameService.findGameById(id)
+  // if(game.players[idPlayer])
+  res.status(200).json(game)
 })
 
 // Listen to get /games

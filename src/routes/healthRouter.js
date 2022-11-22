@@ -6,4 +6,5 @@ router.get("/", function (req, res) {
   res.json({ health: "ok" })
 })
 
+router.post("/")
 export default router

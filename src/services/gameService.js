@@ -69,7 +69,6 @@ export function createGame(name) {
   db.saveGame(game)
   return game
 }
-
 export function getGames() {
   const games = db.getGames()
   return games.map((game) => ({ id: game.id, name: game.name }))
