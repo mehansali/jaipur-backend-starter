@@ -17,21 +17,32 @@ router.get("/", function (req, res) {
   return res.status(200).json(games)
 })
 
-router.post("/:gameId/players/:playerId", function (req, res) {
+router.post("/:gameId/players/:playerId/take-good", function (req, res) {
   const id = req.params.gameId
-  const idPlayer = Number.parseInt(req.params.playerId)
-
-  if (!id || !idPlayer) {
-    return res.status(400).send("GameId or player not found")
-  }
+  const playerId = parseInt(req.params.playerId)
+  const goodBody = req.body.good
   const game = gameService.findGameById(id)
   console.log(game)
 
   if (!game) {
     return res.status(400).send("eerror frrr")
   }
-  game._players[idPlayer].market[0] = game._players[idPlayer]._deck[0]
-  res.status(200).json(game._players[idPlayer].hand)
+
+  const index = game.market.findIndex((good) => good === goodBody)
+  if (index) {
+    game.market[index] = game._deck[0]
+  }
+  const playergame = {
+    id: game.id,
+    name: game.name,
+    market: game.market,
+    hand: game._players[playerId].hand,
+    currentPlayerIndex: game.currentPlayerIndex,
+    tokens: game.tokens,
+    bonusTokens: game._bonusTokens,
+  }
+  console.log(playergame)
+  res.status(200).json(playergame)
 })
 
 // Listen to get /games
