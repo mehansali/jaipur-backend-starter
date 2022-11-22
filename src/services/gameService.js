@@ -71,8 +71,16 @@ export function createGame(name) {
 }
 
 export function getGames() {
+  const games = db.getGames()
+  return games.map((game) => ({ id: game.id, name: game.name }))
+}
 
-  const games = db.getGames(); 
-  return games.map((game) => ({ id: game.id, name: game.name}))
-
+export function getGamesById(id) {
+  const games = db.getGames()
+  const gameId = Number.parseInt(id)
+  // filter pour trouver le bon id
+  console.log(gameId)
+  const game = games.find((game) => game.id === gameId)
+  
+  return game
 }
