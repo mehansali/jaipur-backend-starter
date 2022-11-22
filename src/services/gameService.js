@@ -80,6 +80,15 @@ export function getGamesById(id) {
   // filter pour trouver le bon id
   console.log(gameId)
   const game = games.find((game) => game.id === gameId)
-
+  return game
+}
+export function findGameById(id) {
+  const games = db.getGames()
+  id = Number.parseInt(id)
+  const game = games.find((game) => game.id === id)
+  if (!game) {
+    console.log("nah")
+    throw new Error("Cannot find game by id")
+  }
   return game
 }

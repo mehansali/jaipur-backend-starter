@@ -14,22 +14,24 @@ router.post("/", function (req, res) {
 // Listen to get /games
 router.get("/", function (req, res) {
   const games = gameService.getGames()
-  res.status(200).json(games)
+  return res.status(200).json(games)
 })
 
 router.post("/:gameId/players/:playerId", function (req, res) {
-  if (!req.body.name) {
-    return res.status(400).send("Missing name parameter")
-  }
   const id = req.params.gameId
-  const idPlayer = req.params.playerId
+  const idPlayer = Number.parseInt(req.params.playerId)
 
   if (!id || !idPlayer) {
     return res.status(400).send("GameId or player not found")
   }
   const game = gameService.findGameById(id)
-  // if(game.players[idPlayer])
-  res.status(200).json(game)
+  console.log(game)
+
+  if (!game) {
+    return res.status(400).send("eerror frrr")
+  }
+  game._players[idPlayer].market[0] = game._players[idPlayer]._deck[0]
+  res.status(200).json(game._players[idPlayer].hand)
 })
 
 // Listen to get /games
