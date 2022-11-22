@@ -1,4 +1,9 @@
 import * as gameService from "./gameService"
+import * as db from "../database"
+
+beforeEach(() => {
+  db.clear()
+})
 
 describe("Game service", () => {
   test("should init a deck", () => {
@@ -30,5 +35,12 @@ describe("Game service", () => {
     expect(game._players[1].hand.length).toBe(2)
     expect(game._players[1].hand).toStrictEqual(["gold", "gold"])
     expect(game._players[1].camelsCount).toBe(0)
+  })
+
+  test("should get games from db", () => {
+    db.saveGame({ id: "toto", name: "toto" })
+    db.saveGame({ id: "tutu", name: "tutu" })
+    const game = gameService.getGames()
+    expect(game.length).toBe(2)
   })
 })

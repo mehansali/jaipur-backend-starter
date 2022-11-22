@@ -36,6 +36,7 @@ export function putCamelsFromHandToHerd(game) {
 }
 
 // Create a game object
+
 export function createGame(name) {
   const deck = initDeck()
   const market = ["camel", "camel", "camel", ...drawCards(deck, 2)]
@@ -66,5 +67,20 @@ export function createGame(name) {
   }
   putCamelsFromHandToHerd(game)
   db.saveGame(game)
+  return game
+}
+
+export function getGames() {
+  const games = db.getGames()
+  return games.map((game) => ({ id: game.id, name: game.name }))
+}
+
+export function getGamesById(id) {
+  const games = db.getGames()
+  const gameId = Number.parseInt(id)
+  // filter pour trouver le bon id
+  console.log(gameId)
+  const game = games.find((game) => game.id === gameId)
+
   return game
 }
